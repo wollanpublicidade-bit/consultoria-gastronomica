@@ -1,0 +1,1655 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Wollan | Consultoria para Restaurantes</title>
+
+  <style>
+    :root {
+      --azul-escuro: #061f55;
+      --azul-medio: #0a63bd;
+      --azul-claro: #159bd7;
+      --ciano: #29c8ff;
+      --branco: #ffffff;
+      --gelo: #eef8ff;
+      --texto: #102033;
+      --cinza: #667085;
+      --verde: #12b76a;
+      --vermelho: #f04438;
+      --sombra: 0 24px 70px rgba(0, 22, 70, .28);
+      --borda: 28px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--texto);
+      background:
+        radial-gradient(circle at 10% 5%, rgba(41, 200, 255, .35), transparent 28%),
+        radial-gradient(circle at 85% 12%, rgba(255, 255, 255, .14), transparent 24%),
+        linear-gradient(135deg, #061f55 0%, #0a63bd 48%, #159bd7 100%);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+      background-image:
+        linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+      background-size: 52px 52px;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .navbar {
+      position: fixed;
+      top: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 50;
+      width: calc(100% - 42px);
+      max-width: 1240px;
+      padding: 14px 18px;
+      border-radius: 22px;
+      background: rgba(4, 24, 65, .72);
+      backdrop-filter: blur(18px);
+      border: 1px solid rgba(255,255,255,.22);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 18px 50px rgba(0,0,0,.18);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: white;
+      font-weight: 900;
+      letter-spacing: .08em;
+    }
+
+    .brand img {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      object-fit: cover;
+    }
+
+    .navlinks {
+      display: flex;
+      gap: 6px;
+    }
+
+    .navlinks a {
+      color: rgba(255,255,255,.82);
+      font-size: 14px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      transition: .2s;
+    }
+
+    .navlinks a:hover {
+      color: white;
+      background: rgba(255,255,255,.12);
+    }
+
+    .hero {
+      min-height: 100vh;
+      padding: 140px 24px 84px;
+      display: flex;
+      align-items: center;
+    }
+
+    .wrap {
+      width: 100%;
+      max-width: 1240px;
+      margin: auto;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 34px;
+      align-items: center;
+    }
+
+    .tag {
+      display: inline-flex;
+      width: fit-content;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 18px;
+      padding: 9px 14px;
+      color: white;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      background: rgba(255,255,255,.13);
+      border: 1px solid rgba(255,255,255,.22);
+      backdrop-filter: blur(12px);
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 780px;
+      color: white;
+      font-size: clamp(44px, 7vw, 84px);
+      line-height: .94;
+      letter-spacing: -0.07em;
+    }
+
+    .hero p {
+      margin: 26px 0 0;
+      max-width: 720px;
+      color: rgba(255,255,255,.82);
+      font-size: clamp(17px, 2vw, 22px);
+      line-height: 1.55;
+    }
+
+    .actions {
+      margin-top: 32px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .btn {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      padding: 15px 22px;
+      border-radius: 999px;
+      font-weight: 900;
+      transition: .2s ease;
+      border: 1px solid rgba(255,255,255,.24);
+    }
+
+    .btn.primary {
+      background: white;
+      color: var(--azul-escuro);
+      box-shadow: 0 18px 48px rgba(0,0,0,.18);
+    }
+
+    .btn.secondary {
+      color: white;
+      background: rgba(255,255,255,.12);
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+    }
+
+    .hero-card {
+      min-height: 560px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 40px;
+      background:
+        linear-gradient(180deg, rgba(3, 17, 48, .08), rgba(3, 17, 48, .86)),
+        url("https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1200&q=80");
+      background-size: cover;
+      background-position: center;
+      box-shadow: var(--sombra);
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: 18px;
+      border: 1px solid rgba(255,255,255,.24);
+      border-radius: 30px;
+      pointer-events: none;
+    }
+
+    .floating-box {
+      position: absolute;
+      left: 24px;
+      right: 24px;
+      bottom: 24px;
+      padding: 24px;
+      border-radius: 28px;
+      color: white;
+      background: rgba(4, 24, 65, .72);
+      backdrop-filter: blur(18px);
+      border: 1px solid rgba(255,255,255,.2);
+    }
+
+    .floating-box h3 {
+      margin: 0 0 10px;
+      font-size: 28px;
+      letter-spacing: -0.04em;
+    }
+
+    .floating-box p {
+      margin: 0;
+      font-size: 16px;
+      line-height: 1.55;
+      color: rgba(255,255,255,.78);
+    }
+
+    .mini-metrics {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .mini-metric {
+      padding: 14px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.13);
+    }
+
+    .mini-metric strong {
+      display: block;
+      font-size: 20px;
+    }
+
+    .mini-metric span {
+      display: block;
+      margin-top: 3px;
+      font-size: 12px;
+      color: rgba(255,255,255,.68);
+    }
+
+    section {
+      padding: 88px 24px;
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: 1fr .75fr;
+      gap: 26px;
+      align-items: end;
+      margin-bottom: 34px;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      color: white;
+      font-size: clamp(36px, 5vw, 62px);
+      line-height: 1;
+      letter-spacing: -0.06em;
+    }
+
+    .lead {
+      margin: 0;
+      color: rgba(255,255,255,.78);
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    .grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .cols-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .cols-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .card {
+      min-height: 220px;
+      padding: 26px;
+      border-radius: var(--borda);
+      background: rgba(255,255,255,.94);
+      box-shadow: var(--sombra);
+      border: 1px solid rgba(255,255,255,.6);
+    }
+
+    .card h3 {
+      margin: 16px 0 10px;
+      color: var(--azul-escuro);
+      font-size: 26px;
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+    }
+
+    .card p {
+      margin: 0;
+      color: #475467;
+      font-size: 16px;
+      line-height: 1.58;
+    }
+
+    .icon {
+      width: 54px;
+      height: 54px;
+      display: grid;
+      place-items: center;
+      border-radius: 18px;
+      color: white;
+      font-size: 26px;
+      background: linear-gradient(135deg, var(--ciano), var(--azul-medio));
+      box-shadow: 0 14px 30px rgba(10,99,189,.28);
+    }
+
+    .dark-card {
+      color: white;
+      background: rgba(5, 22, 58, .72);
+      border: 1px solid rgba(255,255,255,.18);
+      backdrop-filter: blur(16px);
+    }
+
+    .dark-card h3 {
+      color: white;
+    }
+
+    .dark-card p {
+      color: rgba(255,255,255,.76);
+    }
+
+    .photo-grid {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .photo-card {
+      min-height: 520px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 38px;
+      box-shadow: var(--sombra);
+      background:
+        linear-gradient(180deg, rgba(3, 18, 50, .05), rgba(3, 18, 50, .86)),
+        var(--foto);
+      background-size: cover;
+      background-position: center;
+    }
+
+    .caption {
+      position: absolute;
+      left: 24px;
+      right: 24px;
+      bottom: 24px;
+      padding: 22px;
+      border-radius: 26px;
+      color: white;
+      background: rgba(4, 24, 65, .7);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,.2);
+    }
+
+    .caption h3 {
+      margin: 0 0 8px;
+      font-size: 30px;
+      letter-spacing: -0.05em;
+    }
+
+    .caption p {
+      margin: 0;
+      line-height: 1.55;
+      color: rgba(255,255,255,.78);
+    }
+
+    .kpi-panel {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .kpi {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      padding: 24px;
+      border-radius: 28px;
+      background: rgba(255,255,255,.94);
+      box-shadow: var(--sombra);
+    }
+
+    .kpi strong {
+      display: block;
+      color: var(--azul-escuro);
+      font-size: 22px;
+      letter-spacing: -0.04em;
+    }
+
+    .kpi span {
+      display: block;
+      margin-top: 7px;
+      color: #526174;
+      line-height: 1.45;
+    }
+
+    .calculator-box {
+      border-radius: 42px;
+      overflow: hidden;
+      background: rgba(255,255,255,.96);
+      box-shadow: var(--sombra);
+      border: 1px solid rgba(255,255,255,.6);
+    }
+
+    .calculator-top {
+      display: grid;
+      grid-template-columns: 1fr .85fr;
+      gap: 28px;
+      padding: 34px;
+      background:
+        radial-gradient(circle at 20% 10%, rgba(41,200,255,.22), transparent 34%),
+        linear-gradient(135deg, #ffffff 0%, #eef8ff 100%);
+    }
+
+    .calculator-title h2 {
+      margin: 0;
+      color: var(--azul-escuro);
+      font-size: clamp(34px, 5vw, 56px);
+      line-height: .98;
+      letter-spacing: -0.06em;
+    }
+
+    .calculator-title p {
+      margin: 18px 0 0;
+      color: #475467;
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    .calculator-alert {
+      padding: 24px;
+      border-radius: 28px;
+      color: white;
+      background:
+        linear-gradient(135deg, rgba(6,31,85,.98), rgba(10,99,189,.92)),
+        url("https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=900&q=80");
+      background-size: cover;
+      background-position: center;
+      box-shadow: 0 18px 44px rgba(6,31,85,.26);
+    }
+
+    .calculator-alert strong {
+      display: block;
+      font-size: 26px;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+    }
+
+    .calculator-alert span {
+      display: block;
+      margin-top: 10px;
+      color: rgba(255,255,255,.76);
+      line-height: 1.5;
+    }
+
+    .calculator-content {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 0;
+      border-top: 1px solid #d9e8f5;
+    }
+
+    .inputs {
+      padding: 30px;
+      background: #ffffff;
+      border-right: 1px solid #d9e8f5;
+    }
+
+    .field {
+      margin-bottom: 22px;
+    }
+
+    .field label {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+      color: var(--azul-escuro);
+      font-weight: 900;
+      line-height: 1.3;
+    }
+
+    .field label small {
+      color: #667085;
+      font-weight: 700;
+    }
+
+    .input-line {
+      display: grid;
+      grid-template-columns: 1fr 86px;
+      gap: 12px;
+      align-items: center;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--azul-medio);
+    }
+
+    input[type="number"] {
+      width: 100%;
+      padding: 12px 10px;
+      border-radius: 14px;
+      border: 1px solid #c9d9ea;
+      outline: none;
+      color: var(--azul-escuro);
+      font-weight: 900;
+      font-size: 15px;
+      background: #f8fbff;
+    }
+
+    input[type="number"]:focus {
+      border-color: var(--azul-claro);
+      box-shadow: 0 0 0 4px rgba(41,200,255,.16);
+    }
+
+    .scenario-buttons {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .scenario {
+      border: none;
+      cursor: pointer;
+      padding: 13px 10px;
+      border-radius: 16px;
+      font-weight: 900;
+      color: var(--azul-escuro);
+      background: #eef8ff;
+      transition: .2s ease;
+    }
+
+    .scenario:hover {
+      transform: translateY(-2px);
+      background: #dff3ff;
+    }
+
+    .results {
+      padding: 30px;
+      background:
+        radial-gradient(circle at 88% 8%, rgba(41,200,255,.16), transparent 30%),
+        #f7fbff;
+    }
+
+    .result-main {
+      padding: 26px;
+      border-radius: 30px;
+      color: white;
+      background: linear-gradient(135deg, #061f55, #0a63bd);
+      box-shadow: 0 20px 50px rgba(6,31,85,.24);
+    }
+
+    .result-main span {
+      display: block;
+      color: rgba(255,255,255,.74);
+      font-weight: 800;
+    }
+
+    .result-main strong {
+      display: block;
+      margin-top: 8px;
+      font-size: clamp(36px, 5vw, 58px);
+      line-height: 1;
+      letter-spacing: -0.06em;
+    }
+
+    .result-main p {
+      margin: 14px 0 0;
+      color: rgba(255,255,255,.78);
+      line-height: 1.5;
+    }
+
+    .result-grid {
+      margin-top: 16px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    .result-card {
+      padding: 20px;
+      border-radius: 24px;
+      background: white;
+      border: 1px solid #dcebf7;
+    }
+
+    .result-card span {
+      display: block;
+      color: #667085;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .result-card strong {
+      display: block;
+      margin-top: 8px;
+      color: var(--azul-escuro);
+      font-size: 28px;
+      letter-spacing: -0.05em;
+    }
+
+    .result-card.negative strong {
+      color: var(--vermelho);
+    }
+
+    .result-card.positive strong {
+      color: var(--verde);
+    }
+
+    .bar-area {
+      margin-top: 18px;
+      padding: 20px;
+      border-radius: 26px;
+      background: white;
+      border: 1px solid #dcebf7;
+    }
+
+    .bar-title {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+      font-weight: 900;
+      color: var(--azul-escuro);
+    }
+
+    .bar {
+      height: 16px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: #e8f1fb;
+    }
+
+    .bar-fill {
+      width: 0%;
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--vermelho), #f79009);
+      transition: .4s ease;
+    }
+
+    .diagnostic-text {
+      margin-top: 18px;
+      padding: 20px;
+      border-radius: 26px;
+      color: #344054;
+      line-height: 1.58;
+      background: #ffffff;
+      border: 1px solid #dcebf7;
+    }
+
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .tab {
+      border: 1px solid rgba(255,255,255,.26);
+      cursor: pointer;
+      color: white;
+      background: rgba(255,255,255,.12);
+      padding: 13px 18px;
+      border-radius: 999px;
+      font-weight: 900;
+      transition: .2s;
+    }
+
+    .tab.active,
+    .tab:hover {
+      color: var(--azul-escuro);
+      background: white;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+      animation: fade .25s ease both;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 16px;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 72px 1fr;
+      gap: 18px;
+      align-items: start;
+      padding: 22px;
+      border-radius: 28px;
+      background: rgba(255,255,255,.94);
+      box-shadow: var(--sombra);
+    }
+
+    .num {
+      width: 58px;
+      height: 58px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      color: white;
+      font-size: 22px;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--azul-claro), var(--azul-escuro));
+    }
+
+    .timeline-item h3 {
+      margin: 0 0 8px;
+      color: var(--azul-escuro);
+      font-size: 24px;
+      letter-spacing: -0.04em;
+    }
+
+    .timeline-item p {
+      margin: 0;
+      color: #475467;
+      line-height: 1.55;
+    }
+
+    .closing {
+      text-align: center;
+      padding: 110px 24px;
+    }
+
+    .closing-box {
+      max-width: 980px;
+      margin: auto;
+      padding: 48px;
+      border-radius: 42px;
+      background: rgba(255,255,255,.13);
+      border: 1px solid rgba(255,255,255,.26);
+      backdrop-filter: blur(18px);
+      box-shadow: var(--sombra);
+    }
+
+    .closing-box img {
+      width: 86px;
+      height: 86px;
+      object-fit: cover;
+      border-radius: 24px;
+      margin-bottom: 20px;
+      box-shadow: 0 18px 46px rgba(0,0,0,.2);
+    }
+
+    .closing-box h2 {
+      margin: 0;
+      color: white;
+      font-size: clamp(38px, 6vw, 76px);
+      line-height: .98;
+      letter-spacing: -0.07em;
+    }
+
+    .closing-box p {
+      max-width: 780px;
+      margin: 22px auto 0;
+      color: rgba(255,255,255,.82);
+      font-size: 19px;
+      line-height: 1.62;
+    }
+
+    .note {
+      display: inline-flex;
+      margin-top: 24px;
+      padding: 13px 18px;
+      border-radius: 999px;
+      background: white;
+      color: var(--azul-escuro);
+      font-weight: 900;
+    }
+
+    footer {
+      padding: 28px 24px 42px;
+      text-align: center;
+      color: rgba(255,255,255,.62);
+      font-size: 14px;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: .7s ease;
+    }
+
+    .reveal.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes fade {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 980px) {
+      .navlinks {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 112px;
+      }
+
+      .hero-grid,
+      .section-head,
+      .photo-grid,
+      .calculator-top,
+      .calculator-content {
+        grid-template-columns: 1fr;
+      }
+
+      .inputs {
+        border-right: none;
+        border-bottom: 1px solid #d9e8f5;
+      }
+
+      .cols-3,
+      .cols-2,
+      .kpi-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-card {
+        min-height: 520px;
+      }
+
+      .mini-metrics,
+      .result-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .scenario-buttons {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 560px) {
+      section {
+        padding: 64px 16px;
+      }
+
+      .hero {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+
+      .actions {
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .floating-box {
+        left: 14px;
+        right: 14px;
+        bottom: 14px;
+      }
+
+      .hero-card {
+        min-height: 470px;
+        border-radius: 30px;
+      }
+
+      .calculator-top,
+      .inputs,
+      .results,
+      .closing-box {
+        padding: 22px;
+      }
+
+      .timeline-item {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="navbar">
+    <a href="#inicio" class="brand">
+      <img src="logo-wollan.jpeg" alt="Logo Wollan">
+      <span>WOLLAN</span>
+    </a>
+
+    <div class="navlinks">
+      <a href="#diagnostico">Diagnóstico</a>
+      <a href="#calculadora">Calculadora</a>
+      <a href="#metodo">Método</a>
+      <a href="#frentes">Frentes</a>
+      <a href="#proximos">Fechamento</a>
+    </div>
+  </nav>
+
+  <header class="hero" id="inicio">
+    <div class="wrap hero-grid">
+
+      <div class="reveal">
+        <span class="tag">🍽️ Consultoria Wollan para Restaurantes</span>
+
+        <h1>Ajuste de lucro para restaurantes.</h1>
+
+        <p>
+          Uma apresentação para reunião com cliente final, mostrando de forma clara onde o restaurante pode estar perdendo dinheiro,
+          como calcular essa perda e quais ajustes podem transformar operação, cardápio e números em resultado real.
+        </p>
+
+        <div class="actions">
+          <a class="btn primary" href="#calculadora">Abrir calculadora →</a>
+          <a class="btn secondary" href="#diagnostico">Começar diagnóstico</a>
+        </div>
+      </div>
+
+      <div class="hero-card reveal">
+        <div class="floating-box">
+          <h3>Não é só vender mais. É lucrar melhor.</h3>
+
+          <p>
+            O foco da consultoria é olhar para CMV, preço, margem, cardápio, estoque e processo —
+            os pontos que decidem se o faturamento vira lucro.
+          </p>
+
+          <div class="mini-metrics">
+            <div class="mini-metric">
+              <strong>CMV</strong>
+              <span>custo real dos pratos</span>
+            </div>
+
+            <div class="mini-metric">
+              <strong>Preço</strong>
+              <span>cálculo com método</span>
+            </div>
+
+            <div class="mini-metric">
+              <strong>Lucro</strong>
+              <span>margem por produto</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <section id="diagnostico">
+    <div class="wrap">
+
+      <div class="section-head reveal">
+        <div>
+          <span class="tag">01 · Diagnóstico</span>
+          <h2>O restaurante pode estar cheio e ainda assim perder dinheiro.</h2>
+        </div>
+
+        <p class="lead">
+          A reunião precisa mostrar o ponto central: nem sempre o problema está em vender pouco.
+          Muitas vezes o dinheiro escapa no preço errado, no CMV alto, no desperdício, no estoque e em pratos que vendem mas deixam pouca margem.
+        </p>
+      </div>
+
+      <div class="grid cols-3">
+        <div class="card reveal">
+          <div class="icon">💸</div>
+          <h3>Faturamento sem lucro</h3>
+          <p>
+            O caixa gira, o salão movimenta, mas no fim do mês sobra menos do que deveria. Isso normalmente indica problema de custo, preço ou margem.
+          </p>
+        </div>
+
+        <div class="card reveal">
+          <div class="icon">📋</div>
+          <h3>Cardápio sem estratégia</h3>
+          <p>
+            Pratos são definidos por gosto ou costume, mas nem sempre por lucro, volume, ticket médio e facilidade de operação.
+          </p>
+        </div>
+
+        <div class="card reveal">
+          <div class="icon">📦</div>
+          <h3>Estoque sem controle</h3>
+          <p>
+            Pequenas perdas no dia a dia parecem normais, mas somadas podem tirar uma parte importante do resultado mensal.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap photo-grid">
+
+      <div class="photo-card reveal" style="--foto: url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1200&q=80');">
+        <div class="caption">
+          <h3>O objetivo é encontrar o gargalo.</h3>
+          <p>
+            Antes de qualquer mudança, o trabalho é entender onde o lucro está escapando e quais ajustes podem gerar impacto mais rápido.
+          </p>
+        </div>
+      </div>
+
+      <div class="kpi-panel">
+        <div class="kpi reveal">
+          <div class="icon">🧾</div>
+          <div>
+            <strong>Ficha técnica</strong>
+            <span>Custo por prato, porção, insumos, padrão de preparo e margem real.</span>
+          </div>
+        </div>
+
+        <div class="kpi reveal">
+          <div class="icon">📊</div>
+          <div>
+            <strong>CMV e margem</strong>
+            <span>Análise do que realmente sobra depois das vendas.</span>
+          </div>
+        </div>
+
+        <div class="kpi reveal">
+          <div class="icon">🍔</div>
+          <div>
+            <strong>Engenharia de cardápio</strong>
+            <span>Decisão sobre destaque, retirada, ajuste e reposicionamento de itens.</span>
+          </div>
+        </div>
+
+        <div class="kpi reveal">
+          <div class="icon">👥</div>
+          <div>
+            <strong>Equipe e processo</strong>
+            <span>Padronização para reduzir erro, retrabalho, perda e inconsistência.</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="calculadora">
+    <div class="wrap">
+
+      <div class="calculator-box reveal">
+
+        <div class="calculator-top">
+          <div class="calculator-title">
+            <span class="tag" style="color:#061f55; background:#dff3ff; border-color:#c8e9ff;">02 · Calculadora intuitiva</span>
+
+            <h2>Quanto o restaurante pode estar perdendo por mês?</h2>
+
+            <p>
+              Use essa simulação durante a reunião para transformar a conversa em algo visual.
+              O cliente digita o faturamento, o CMV atual, uma meta de CMV e uma estimativa de desperdício.
+              O painel mostra uma projeção simples da perda mensal, perda anual e potencial de recuperação.
+            </p>
+          </div>
+
+          <div class="calculator-alert">
+            <strong>Essa conta não é promessa de resultado.</strong>
+            <span>
+              Ela serve para abrir o diagnóstico e mostrar que, muitas vezes, pequenos percentuais escondem grandes valores no fim do mês.
+            </span>
+          </div>
+        </div>
+
+        <div class="calculator-content">
+
+          <div class="inputs">
+
+            <div class="field">
+              <label>
+                Faturamento mensal
+                <small>R$</small>
+              </label>
+
+              <div class="input-line">
+                <input type="range" id="faturamentoRange" min="20000" max="500000" step="5000" value="120000">
+                <input type="number" id="faturamento" min="0" value="120000">
+              </div>
+            </div>
+
+            <div class="field">
+              <label>
+                CMV atual estimado
+                <small>%</small>
+              </label>
+
+              <div class="input-line">
+                <input type="range" id="cmvAtualRange" min="20" max="65" step="1" value="38">
+                <input type="number" id="cmvAtual" min="0" max="100" value="38">
+              </div>
+            </div>
+
+            <div class="field">
+              <label>
+                CMV saudável/meta
+                <small>%</small>
+              </label>
+
+              <div class="input-line">
+                <input type="range" id="cmvMetaRange" min="18" max="55" step="1" value="32">
+                <input type="number" id="cmvMeta" min="0" max="100" value="32">
+              </div>
+            </div>
+
+            <div class="field">
+              <label>
+                Perda por desperdício/estoque
+                <small>% do faturamento</small>
+              </label>
+
+              <div class="input-line">
+                <input type="range" id="desperdicioRange" min="0" max="15" step=".5" value="4">
+                <input type="number" id="desperdicio" min="0" max="100" step=".5" value="4">
+              </div>
+            </div>
+
+            <div class="field">
+              <label>
+                Potencial de recuperação
+                <small>% da perda</small>
+              </label>
+
+              <div class="input-line">
+                <input type="range" id="recuperacaoRange" min="10" max="100" step="5" value="60">
+                <input type="number" id="recuperacao" min="0" max="100" value="60">
+              </div>
+            </div>
+
+            <div class="scenario-buttons">
+              <button class="scenario" onclick="setScenario(65000, 42, 33, 5, 55)">Pequeno</button>
+              <button class="scenario" onclick="setScenario(120000, 38, 32, 4, 60)">Médio</button>
+              <button class="scenario" onclick="setScenario(250000, 40, 31, 6, 65)">Alto volume</button>
+            </div>
+
+          </div>
+
+          <div class="results">
+
+            <div class="result-main">
+              <span>Perda mensal estimada</span>
+              <strong id="perdaMensal">R$ 0</strong>
+              <p id="fraseResultado">
+                Ajuste os números ao lado para simular o possível impacto financeiro.
+              </p>
+            </div>
+
+            <div class="result-grid">
+              <div class="result-card negative">
+                <span>Perda anual estimada</span>
+                <strong id="perdaAnual">R$ 0</strong>
+              </div>
+
+              <div class="result-card positive">
+                <span>Possível recuperação mensal</span>
+                <strong id="recuperacaoMensal">R$ 0</strong>
+              </div>
+
+              <div class="result-card">
+                <span>Excesso por CMV</span>
+                <strong id="perdaCMV">R$ 0</strong>
+              </div>
+
+              <div class="result-card">
+                <span>Perda por desperdício</span>
+                <strong id="perdaDesperdicio">R$ 0</strong>
+              </div>
+            </div>
+
+            <div class="bar-area">
+              <div class="bar-title">
+                <span>Percentual estimado do faturamento em perda</span>
+                <span id="percentualPerda">0%</span>
+              </div>
+
+              <div class="bar">
+                <div class="bar-fill" id="barFill"></div>
+              </div>
+            </div>
+
+            <div class="diagnostic-text" id="diagnosticoTexto">
+              A simulação vai aparecer aqui com uma leitura simples para usar durante a reunião.
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <section id="metodo">
+    <div class="wrap">
+
+      <div class="section-head reveal">
+        <div>
+          <span class="tag">03 · Método</span>
+          <h2>Do diagnóstico à rotina de controle.</h2>
+        </div>
+
+        <p class="lead">
+          A consultoria não deve ser uma conversa solta. Ela precisa virar método: levantar dados, encontrar perdas,
+          corrigir os pontos mais importantes e criar uma rotina de acompanhamento.
+        </p>
+      </div>
+
+      <div class="grid cols-2">
+        <div class="card dark-card reveal">
+          <div class="icon">🔎</div>
+          <h3>1. Levantar dados reais</h3>
+          <p>
+            Vendas, compras, cardápio, preços, estoque, equipe, rotina de produção e principais dificuldades da operação.
+          </p>
+        </div>
+
+        <div class="card dark-card reveal">
+          <div class="icon">⚠️</div>
+          <h3>2. Mapear perdas</h3>
+          <p>
+            Identificar pratos mal precificados, CMV alto, desperdício, gargalos de produção e itens que pesam na operação.
+          </p>
+        </div>
+
+        <div class="card dark-card reveal">
+          <div class="icon">🛠️</div>
+          <h3>3. Corrigir o que afeta lucro</h3>
+          <p>
+            Ajustar cálculo de preço, ficha técnica, composição do cardápio, estoque, margem e processo.
+          </p>
+        </div>
+
+        <div class="card dark-card reveal">
+          <div class="icon">📊</div>
+          <h3>4. Acompanhar com clareza</h3>
+          <p>
+            Criar indicadores, frequência de análise e plano de ação para o restaurante não voltar ao improviso.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="frentes">
+    <div class="wrap">
+
+      <div class="section-head reveal">
+        <div>
+          <span class="tag">04 · Frentes de atuação</span>
+          <h2>O que pode entrar no projeto.</h2>
+        </div>
+
+        <p class="lead">
+          Cada restaurante tem um cenário. Por isso, a consultoria pode focar nas áreas que mais pesam no resultado:
+          preço, CMV, margem, cardápio, estoque, equipe, abertura ou eventos.
+        </p>
+      </div>
+
+      <div class="tabs reveal">
+        <button class="tab active" data-tab="t1">Lucro e números</button>
+        <button class="tab" data-tab="t2">Cardápio</button>
+        <button class="tab" data-tab="t3">Operação</button>
+        <button class="tab" data-tab="t4">Expansão</button>
+      </div>
+
+      <div class="tab-content active" id="t1">
+        <div class="grid cols-3">
+          <div class="card reveal">
+            <div class="icon">📈</div>
+            <h3>Precificação</h3>
+            <p>
+              Método para calcular preço, ajustar markup e evitar que o valor seja definido no chute ou apenas olhando concorrente.
+            </p>
+          </div>
+
+          <div class="card reveal">
+            <div class="icon">🧮</div>
+            <h3>CMV</h3>
+            <p>
+              Controle do custo de mercadoria vendida, frequência de análise e ações práticas quando o custo passa do limite.
+            </p>
+          </div>
+
+          <div class="card reveal">
+            <div class="icon">🏦</div>
+            <h3>Margem de lucro</h3>
+            <p>
+              Separar faturamento de lucro real, entender margem por produto e corrigir itens que vendem mas deixam pouco resultado.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-content" id="t2">
+        <div class="grid cols-3">
+          <div class="card reveal">
+            <div class="icon">🍽️</div>
+            <h3>Montagem de cardápio</h3>
+            <p>
+              Organização de pratos, categorias, clareza de escolha e coerência com o público que o restaurante quer atrair.
+            </p>
+          </div>
+
+          <div class="card reveal">
+            <div class="icon">⭐</div>
+            <h3>Engenharia de cardápio</h3>
+            <p>
+              Classificar itens por venda e margem, decidir o que destacar, ajustar, manter ou retirar.
+            </p>
+          </div>
+
+          <div class="card reveal">
+            <div class="icon">🧾</div>
+            <h3>Ficha técnica</h3>
+            <p>
+              Padronizar ingredientes, quantidade, preparo e custo para que o prato tenha consistência e preço calculado.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-content" id="t3">
+        <div class="grid cols-3">
+          <div class="card reveal">
+            <div class="icon">👨‍🍳</div>
+            <h3>Equipe</h3>
+            <p>
+              Estrutura mínima, definição de funções e redução de falhas causadas por falta de padrão.
+            </p>
+          </div>
+
+          <div class="card reveal">
+            <div class="icon">📦</div>
+            <h3>Estoque</h3>
+            <p>
+              Controle de entrada e saída, rotina de armazenamento e redução de perdas no dia a dia.
+            </p>
+          </div>
+
+          <div class="card reveal">
+            <div class="icon">✅</div>
+            <h3>Treinamento</h3>
+            <p>
+              Padronização de processos para diminuir erro, acelerar operação e manter qualidade.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-content" id="t4">
+        <div class="grid cols-3">
+          <div class="card reveal">
+            <div class="icon">🏗️</div>
+            <h3>Abertura</h3>
+            <p>
+              Checklist inicial, estrutura mínima, erros comuns e planejamento financeiro para começar melhor.
+            </p>
+          </div>
+
+          <div class="card reveal">
+            <div class="icon">🎉</div>
+            <h3>Eventos</h3>
+            <p>
+              Cálculo por pessoa, formação de preço, operação, negociação e entendimento do desejo do cliente.
+            </p>
+          </div>
+
+          <div class="card reveal">
+            <div class="icon">🤝</div>
+            <h3>Terceirização</h3>
+            <p>
+              Avaliar quando terceirizar faz sentido, quais áreas terceirizar e o impacto em custo e qualidade.
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="proximos">
+    <div class="wrap">
+
+      <div class="section-head reveal">
+        <div>
+          <span class="tag">05 · Fechamento</span>
+          <h2>Próximos passos para iniciar o projeto.</h2>
+        </div>
+
+        <p class="lead">
+          O final da reunião precisa deixar claro o caminho: entender o cenário, definir o foco,
+          montar os entregáveis e enviar a proposta comercial separada, sem colocar preço no dashboard.
+        </p>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-item reveal">
+          <div class="num">1</div>
+          <div>
+            <h3>Confirmar o cenário atual</h3>
+            <p>
+              Entender faturamento, rotina, equipe, cardápio, controle de estoque, principais problemas e objetivos do restaurante.
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal">
+          <div class="num">2</div>
+          <div>
+            <h3>Definir o foco da consultoria</h3>
+            <p>
+              Escolher as frentes prioritárias: CMV, margem, precificação, cardápio, estoque, equipe, abertura ou eventos.
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal">
+          <div class="num">3</div>
+          <div>
+            <h3>Organizar entregáveis</h3>
+            <p>
+              Definir diagnóstico, plano de ação, materiais de apoio, planilhas, relatórios, reuniões e acompanhamento.
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal">
+          <div class="num">4</div>
+          <div>
+            <h3>Enviar proposta comercial</h3>
+            <p>
+              Após o alinhamento, a Wollan envia escopo, formato de entrega, condições e próximos passos de implantação.
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="closing">
+    <div class="closing-box reveal">
+      <img src="logo-wollan.jpeg" alt="Logo Wollan">
+
+      <h2>O lucro precisa ser acompanhado, não adivinhado.</h2>
+
+      <p>
+        A consultoria Wollan entra para transformar conhecimento operacional em decisão prática:
+        entender os números, corrigir gargalos, organizar processos e fazer o restaurante trabalhar com mais controle.
+      </p>
+
+      <div class="note">
+        Investimento e condições seguem na proposta comercial.
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    Wollan · Consultoria para Restaurantes · Dashboard de reunião com cliente final
+  </footer>
+
+  <script>
+    const money = new Intl.NumberFormat("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+      maximumFractionDigits: 0
+    });
+
+    const fields = {
+      faturamento: document.getElementById("faturamento"),
+      faturamentoRange: document.getElementById("faturamentoRange"),
+      cmvAtual: document.getElementById("cmvAtual"),
+      cmvAtualRange: document.getElementById("cmvAtualRange"),
+      cmvMeta: document.getElementById("cmvMeta"),
+      cmvMetaRange: document.getElementById("cmvMetaRange"),
+      desperdicio: document.getElementById("desperdicio"),
+      desperdicioRange: document.getElementById("desperdicioRange"),
+      recuperacao: document.getElementById("recuperacao"),
+      recuperacaoRange: document.getElementById("recuperacaoRange")
+    };
+
+    function syncInputs(input, range) {
+      input.addEventListener("input", () => {
+        range.value = input.value;
+        calcular();
+      });
+
+      range.addEventListener("input", () => {
+        input.value = range.value;
+        calcular();
+      });
+    }
+
+    syncInputs(fields.faturamento, fields.faturamentoRange);
+    syncInputs(fields.cmvAtual, fields.cmvAtualRange);
+    syncInputs(fields.cmvMeta, fields.cmvMetaRange);
+    syncInputs(fields.desperdicio, fields.desperdicioRange);
+    syncInputs(fields.recuperacao, fields.recuperacaoRange);
+
+    function setScenario(faturamento, cmvAtual, cmvMeta, desperdicio, recuperacao) {
+      fields.faturamento.value = faturamento;
+      fields.faturamentoRange.value = faturamento;
+
+      fields.cmvAtual.value = cmvAtual;
+      fields.cmvAtualRange.value = cmvAtual;
+
+      fields.cmvMeta.value = cmvMeta;
+      fields.cmvMetaRange.value = cmvMeta;
+
+      fields.desperdicio.value = desperdicio;
+      fields.desperdicioRange.value = desperdicio;
+
+      fields.recuperacao.value = recuperacao;
+      fields.recuperacaoRange.value = recuperacao;
+
+      calcular();
+    }
+
+    function calcular() {
+      const faturamento = Number(fields.faturamento.value) || 0;
+      const cmvAtual = Number(fields.cmvAtual.value) || 0;
+      const cmvMeta = Number(fields.cmvMeta.value) || 0;
+      const desperdicio = Number(fields.desperdicio.value) || 0;
+      const recuperacao = Number(fields.recuperacao.value) || 0;
+
+      const excessoCMVPercentual = Math.max(cmvAtual - cmvMeta, 0);
+      const perdaCMV = faturamento * (excessoCMVPercentual / 100);
+      const perdaDesperdicio = faturamento * (desperdicio / 100);
+      const perdaMensal = perdaCMV + perdaDesperdicio;
+      const perdaAnual = perdaMensal * 12;
+      const recuperacaoMensal = perdaMensal * (recuperacao / 100);
+      const percentualPerda = faturamento > 0 ? (perdaMensal / faturamento) * 100 : 0;
+
+      document.getElementById("perdaMensal").textContent = money.format(perdaMensal);
+      document.getElementById("perdaAnual").textContent = money.format(perdaAnual);
+      document.getElementById("recuperacaoMensal").textContent = money.format(recuperacaoMensal);
+      document.getElementById("perdaCMV").textContent = money.format(perdaCMV);
+      document.getElementById("perdaDesperdicio").textContent = money.format(perdaDesperdicio);
+      document.getElementById("percentualPerda").textContent = percentualPerda.toFixed(1).replace(".", ",") + "%";
+
+      const bar = document.getElementById("barFill");
+      bar.style.width = Math.min(percentualPerda, 30) / 30 * 100 + "%";
+
+      const fraseResultado = document.getElementById("fraseResultado");
+      const diagnosticoTexto = document.getElementById("diagnosticoTexto");
+
+      if (perdaMensal <= 0) {
+        fraseResultado.textContent = "Neste cenário, o CMV atual está dentro da meta e não foi indicada perda por desperdício.";
+        diagnosticoTexto.textContent =
+          "A leitura inicial é positiva, mas ainda vale analisar ficha técnica, margem por produto, estoque e rotina de acompanhamento para confirmar se o lucro está sendo medido corretamente.";
+      } else {
+        fraseResultado.textContent =
+          "Esse valor mostra uma estimativa simples do quanto pode estar escapando por CMV acima da meta e perdas operacionais.";
+
+        diagnosticoTexto.textContent =
+          "Com faturamento mensal de " + money.format(faturamento) +
+          ", um CMV atual de " + cmvAtual + "% contra uma meta de " + cmvMeta + "% pode representar " + money.format(perdaCMV) +
+          " em excesso de custo. Somando uma perda estimada de " + desperdicio + "% em desperdício ou estoque, o impacto mensal chega a " +
+          money.format(perdaMensal) + ". Se o restaurante recuperar " + recuperacao + "% dessa perda, o ganho potencial mensal seria de aproximadamente " +
+          money.format(recuperacaoMensal) + ".";
+      }
+    }
+
+    calcular();
+
+    const reveals = document.querySelectorAll(".reveal");
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+        }
+      });
+    }, {
+      threshold: 0.12
+    });
+
+    reveals.forEach((el) => observer.observe(el));
+
+    const tabs = document.querySelectorAll(".tab");
+    const contents = document.querySelectorAll(".tab-content");
+
+    tabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        tabs.forEach((item) => item.classList.remove("active"));
+        contents.forEach((content) => content.classList.remove("active"));
+
+        tab.classList.add("active");
+        document.getElementById(tab.dataset.tab).classList.add("active");
+      });
+    });
+  </script>
+
+</body>
+</html>
